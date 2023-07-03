@@ -1,0 +1,85 @@
+{% extends 'www/base.html' %}
+{% block title %}index{% endblock %}
+
+{% block check_user %}
+    {% if user.is_authenticated %}
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="{% url 'logout_user' %}" class="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true">
+                    Log out
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"></path>
+                      <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"></path>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    {% else %}
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="{% url 'sign_in' %}" class="btn btn-sm btn-outline-secondary" style="margin-right: 10px" role="button" aria-pressed="true">
+                    Log in
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"></path>
+                      <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+      <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 font-weight-normal">Сhocolate shop</h1>
+        <p class="lead font-weight-normal">Find your favorite type of chocolate here and order it now!</p>
+        <h4 class="lead font-weight-normal">Welcome!</h4>
+      </div>
+      <div class="product-device box-shadow d-none d-md-block"></div>
+      <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+    </div>
+
+     <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row">
+
+              {% for chocolate in catalog %}
+
+                    <div class="col-md-4">
+                      <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="{{ chocolate.image.url }}" alt="Card image cap">
+                        <div class="card-body">
+                          <h3 class="card-text">
+                              {{ chocolate.brand }}.
+                              <small class="text-muted" style="font-size: 60%">({{ chocolate.type }})</small></h3>
+                          <p class="card-text">{{ chocolate.description }}</p>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                              <a href="{% url 'create_order' chocolate.id %}" class="btn btn-sm btn-outline-secondary">Buy</a>
+                            </div>
+                            <small class="text-muted" style="font-size: 110%">{{ chocolate.price }} KGS</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              {% endfor %}
+
+            </div>
+        </div>
+      </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <script>
+      Holder.addTheme('thumb', {
+        bg: '#55595c',
+        fg: '#eceeef',
+        text: 'Thumbnail'
+      });
+    </script>
+{% endblock %}

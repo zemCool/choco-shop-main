@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img class="mr-3" src="https://upload.wikimedia.org/wikipedia/en/0/07/Ala-Too_International_University_Seal.png" alt="" width="48" height="48">
+            <a href="http://alatoo.edu.kg/#gsc.tab=0" class="navbar-brand">ALA-TOO</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="btn-group">
+                <a href="{% url 'catalog' %}" class="btn btn-outline-secondary">Catalog</a>
+                <a href="#" class="btn btn-outline-secondary">Home</a>
+            </div>
+        </div>
+
+        {% block check_user %}{% endblock %}
+
+    </div>
+</nav>
+{% block content %}{% endblock %}
+<footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">© 2021-2022 Chocolate shop</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Instagram</a></li>
+          <li class="list-inline-item"><a href="#">Telegram</a></li>
+          <li class="list-inline-item"><a href="#">Facebook</a></li>
+        </ul>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>

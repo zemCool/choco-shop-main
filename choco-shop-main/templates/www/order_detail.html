@@ -1,0 +1,84 @@
+{% extends 'www/base.html' %}
+{% block title %}index{% endblock %}
+{% block check_user %}
+    {% if user.is_authenticated %}
+        <ul class="nav navbar-nav navbar-right">
+            <li style="margin-right: 10px">
+                <a href="#" class="btn btn-sm btn-outline-secondary">
+                    Cart
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                      <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'logout_user' %}" class="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true">
+                    Log out
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"></path>
+                      <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"></path>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    {% else %}
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="{% url 'sign_in' %}" class="btn btn-sm btn-outline-secondary" style="margin-right: 10px" role="button" aria-pressed="true">
+                    Log in
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"></path>
+                      <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="container" style="margin-right: 70%">
+          <div class="row">
+          <div class="col-md-4 order-md-2 mb-4">
+              <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Your order</span>
+                <span class="badge badge-secondary badge-pill">3</span>
+              </h4>
+              <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <img class="card-img-top" src="{{ chocolate.image.url }}" alt="Card image cap">
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                  <div>
+                    <h4 class="my-0">{{ chocolate.brand }}</h4>
+                    <small class="text-muted" style="font-size: 110%">({{ chocolate.type }})</small>
+                  </div>
+                  <p class="my-1">{{ chocolate.price }} KGS</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <h4 class="my-0">Customer:</h4>
+                    <p class="my-1">{{ order.first_name }} {{ order.last_name }}</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <h4 class="my-0">Email:</h4>
+                    <p class="my-1">{{ order.email }}</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <h4 class="my-0">City:</h4>
+                    <p class="my-1">{{ order.city }}</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <h4 class="my-0">Address:</h4>
+                    <p class="my-1">{{ order.street }}</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <h4 class="my-0">Total price:</h4>
+                  <strong>{{ chocolate.price }} KGS</strong>
+                </li>
+              </ul>
+              <a href="{% url 'redirect' %}" class="btn btn-primary btn-lg btn-block" style="width: 150px">Submit</a>
+        </div>
+      </div>
+    </div>
+{% endblock %}
